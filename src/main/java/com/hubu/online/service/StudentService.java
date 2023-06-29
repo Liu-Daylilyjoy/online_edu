@@ -14,6 +14,16 @@ import java.util.Map;
 public interface StudentService extends IService<Student> {
 
     /**
+     * 添加用户(包含角色)
+     */
+    boolean saveStudent(Student student);
+
+    /**
+     * 修改用户(包含角色)
+     */
+    boolean updateStudent(Student student);
+
+    /**
      * 根据账号查询用户
      */
 	Student getByUsername(String username);

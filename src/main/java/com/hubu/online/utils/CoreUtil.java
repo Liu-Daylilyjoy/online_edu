@@ -3,6 +3,8 @@ package com.hubu.online.utils;
 import cn.hutool.core.util.StrUtil;
 
 import java.lang.reflect.Field;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
 /**
@@ -287,7 +289,9 @@ public class CoreUtil {
      * 获取某个对象的某个字段的值
      */
     public static Object getFieldValue(Object t, String field) {
-        if (t == null || field == null) return null;
+        if (t == null || field == null) {
+            return null;
+        }
         try {
             Field clazzField = t.getClass().getDeclaredField(field);
             clazzField.setAccessible(true);
@@ -296,6 +300,33 @@ public class CoreUtil {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * 对字符串进行MD5加密
+     * @param data
+     * @return
+     */
+    private static MessageDigest digest = null;
+    public static String encode(String data) {
+        try {
+            digest = MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException nsae) {
+            System.out.println("加密错误");
+            nsae.printStackTrace();
+        }
+        digest.update(data.getBytes());
+        return encodeHex(digest.digest());
+    }
+
+    private static String encodeHex(byte bytes[]) {
+        StringBuffer buf = new StringBuffer(bytes.length * 2);
+        for (int i = 0; i < bytes.length; i++) {
+            if ((bytes[i] & 0xff) < 16)
+                buf.append("0");
+            buf.append(Long.toString(bytes[i] & 0xff, 16));
+        }
+        return buf.toString().toUpperCase();
     }
 
 }
