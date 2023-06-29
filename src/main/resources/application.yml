@@ -1,0 +1,54 @@
+# 端口
+server:
+  port: 8081
+
+# 多环境配置
+spring:
+  profiles:
+    active: dev
+
+  # json时间格式设置
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy/MM/dd HH:mm:ss
+
+  # 设置上传文件大小
+  servlet:
+    multipart.max-file-size: 100MB
+    multipart.max-request-size: 100MB
+
+  # 邮件服务器配置
+  mail:
+    host: smtp.qq.com
+    username:
+    password:
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+            port: 465
+
+  thymeleaf:
+    cache: false
+    mode: HTML
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+
+# Mybatis-plus配置
+mybatis-plus:
+  mapper-locations: classpath:com/hubu/online/mapper/xml/*Mapper.xml
+  typeAliasesPackage: com.hubu.online.entity
+  global-config:
+    id-type: 0
+    field-strategy: 1
+    db-column-underline: true
+    logic-delete-value: 1
+    logic-not-delete-value: 0
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+
