@@ -6,7 +6,7 @@
     <![endif]-->
     <style>
         body {
-            background-image: url("../static/assets/images/login-bg.jpg");
+            background-image: url("assets/images/login-bg.jpg");
             background-repeat: no-repeat;
             background-size: cover;
             min-height: 100vh;
@@ -33,14 +33,14 @@
 
         .login-wrapper > .layui-form {
             padding: 25px 30px;
-            background-color: #fff;
+            background-color: rgb(122, 56, 93, 0.5);
             box-shadow: 0 3px 6px -1px rgba(0, 0, 0, 0.19);
             box-sizing: border-box;
             border-radius: 2px;
         }
 
         .login-wrapper > .layui-form > h2 {
-            color: #333;
+            color: white;
             font-size: 18px;
             text-align: center;
             margin-bottom: 25px;
@@ -164,12 +164,6 @@
             <input class="layui-input" name="password" placeholder="请输入登录密码" type="password"
                    value="123456" lay-verType="tips" lay-verify="required" required/>
         </div>
-<!--        <div class="layui-form-item layui-input-icon-group login-captcha-group">-->
-<!--            <i class="layui-icon layui-icon-auz"></i>-->
-<!--            <input class="layui-input" name="code" placeholder="请输入验证码" autocomplete="off"-->
-<!--                   lay-verType="tips" lay-verify="required" required/>-->
-<!--            <img class="login-captcha" src="assets/captcha" alt=""/>-->
-<!--        </div>-->
         <div class="layui-form-item">
             <input type="checkbox" name="remember" value="true" title="记住密码" lay-skin="primary"/>
             <a href="javascript:layer.msg('请联系管理员',{icon:7,anim:6});" class="layui-link pull-right">忘记密码</a>
@@ -208,12 +202,6 @@
             });
             return false;
         });
-
-
-        // /* 图形验证码 */
-        // $('img.login-captcha').click(function () {
-        //     this.src = this.src + '?t=' + new Date().getTime();
-        // });
 
     });
 </script>

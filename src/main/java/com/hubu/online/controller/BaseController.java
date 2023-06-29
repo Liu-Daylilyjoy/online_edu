@@ -19,7 +19,7 @@ public class BaseController {
         }
         Object object = subject.getPrincipal();
         if (object != null) {
-            return  (User)object;
+            return (User) object;
         }
         return null;
     }

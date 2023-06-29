@@ -1,9 +1,9 @@
 package com.hubu.online.controller;
 
+import com.hubu.online.entity.JsonResult;
 import com.hubu.online.shiro.CustomizedToken;
 import com.hubu.online.entity.Menu;
 import com.hubu.online.service.MenuService;
-import com.wf.captcha.utils.CaptchaUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -67,7 +65,7 @@ public class MainController extends BaseController implements ErrorController {
     /**
      * 主页
      */
-    @RequestMapping({ "/","/index"})
+    @RequestMapping({"/", "/index"})
     public String index(Model model) {
         // 左侧菜单
         List<Menu> menus = menuService.getUserMenu(getLoginUserId(), Menu.TYPE_MENU);

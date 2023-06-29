@@ -12,15 +12,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
-	
-	
-	/**
-	 * 上传文件路径-映射
-	 */
-	@Override
+    /**
+     * 上传文件路径-映射
+     */
+    @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		//如果是Windows系统
-		registry.addResourceHandler("/getFileURL/**").addResourceLocations("file:D:/img/");
+        //如果是Windows系统
+        registry.addResourceHandler("/getFileURL/**").addResourceLocations("file:D:/img/");
     }
 
     /**

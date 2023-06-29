@@ -1,10 +1,9 @@
 package com.hubu.online.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.hubu.online.controller.PageParam;
-import com.hubu.online.controller.PageResult;
+import com.hubu.online.entity.PageParam;
+import com.hubu.online.entity.PageResult;
 import com.hubu.online.entity.Student;
-import com.hubu.online.entity.User;
 
 import java.util.List;
 import java.util.Map;
@@ -13,16 +12,6 @@ import java.util.Map;
  * 用户服务类
  */
 public interface StudentService extends IService<Student> {
-
-    /**
-     * 添加用户(包含角色)
-     */
-    boolean saveStudent(Student student);
-
-    /**
-     * 修改用户(包含角色)
-     */
-    boolean updateStudent(Student student);
 
     /**
      * 根据账号查询用户

@@ -1,7 +1,6 @@
 package com.hubu.online.controller;
 
-import com.hubu.online.entity.BatchParam;
-import com.hubu.online.entity.Menu;
+import com.hubu.online.entity.*;
 import com.hubu.online.service.MenuService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;

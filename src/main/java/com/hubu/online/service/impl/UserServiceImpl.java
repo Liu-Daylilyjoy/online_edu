@@ -3,9 +3,9 @@ package com.hubu.online.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.hubu.online.controller.PageParam;
-import com.hubu.online.controller.PageResult;
-import com.hubu.online.exception.BusinessException;
+import com.hubu.online.entity.PageParam;
+import com.hubu.online.entity.PageResult;
+import com.hubu.online.exception.BaseException;
 import com.hubu.online.entity.Menu;
 import com.hubu.online.mapper.MenuMapper;
 import com.hubu.online.mapper.UserMapper;
@@ -78,11 +78,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public boolean saveUser(User user) {
         if (user.getUsername() != null && baseMapper.selectCount(new QueryWrapper<User>()
                 .eq("username", user.getUsername())) > 0) {
-            throw new BusinessException("账号已存在");
+            throw new BaseException("账号已存在");
         }
         if (user.getPhone() != null && baseMapper.selectCount(new QueryWrapper<User>()
                 .eq("phone", user.getPhone())) > 0) {
-            throw new BusinessException("手机号已存在");
+            throw new BaseException("手机号已存在");
         }
         boolean result = baseMapper.insert(user) > 0;
         if (result && user.getRoleIds() != null) {
@@ -96,11 +96,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public boolean updateUser(User user) {
         if (user.getUsername() != null && baseMapper.selectCount(new QueryWrapper<User>()
                 .eq("username", user.getUsername()).ne("user_id", user.getUserId())) > 0) {
-            throw new BusinessException("账号已存在");
+            throw new BaseException("账号已存在");
         }
         if (user.getPhone() != null && baseMapper.selectCount(new QueryWrapper<User>()
                 .eq("phone", user.getPhone()).ne("user_id", user.getUserId())) > 0) {
-            throw new BusinessException("手机号已存在");
+            throw new BaseException("手机号已存在");
         }
         boolean result = baseMapper.updateById(user) > 0;
         if (result && user.getRoleIds() != null) {
@@ -151,7 +151,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         if (roleIds.size() > 0) {
             if (userRoleMapper.insertBatch(userId, roleIds) < roleIds.size()) {
-                throw new BusinessException("操作失败");
+                throw new BaseException("操作失败");
             }
         }
     }

@@ -5,10 +5,8 @@ import cn.hutool.poi.excel.ExcelReader;
 import cn.hutool.poi.excel.ExcelUtil;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.hubu.online.entity.BatchParam;
+import com.hubu.online.entity.*;
 import com.hubu.online.utils.CoreUtil;
-import com.hubu.online.entity.Role;
-import com.hubu.online.entity.User;
 import com.hubu.online.service.RoleService;
 import com.hubu.online.service.UserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -55,7 +53,7 @@ public class UserController extends BaseController {
     /**
      * 分页查询用户
      */
-    @RequiresPermissions("sys:user:list")
+//    @RequiresPermissions("sys:user:list")
     @ResponseBody
     @RequestMapping("/page")
     public PageResult<User> page(HttpServletRequest request) {

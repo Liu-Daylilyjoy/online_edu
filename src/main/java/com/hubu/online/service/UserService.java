@@ -1,8 +1,8 @@
 package com.hubu.online.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.hubu.online.controller.PageParam;
-import com.hubu.online.controller.PageResult;
+import com.hubu.online.entity.PageParam;
+import com.hubu.online.entity.PageResult;
 import com.hubu.online.entity.User;
 
 import java.util.List;

@@ -1,8 +1,8 @@
 package com.hubu.online.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.hubu.online.controller.PageParam;
-import com.hubu.online.controller.PageResult;
+import com.hubu.online.entity.PageParam;
+import com.hubu.online.entity.PageResult;
 import com.hubu.online.mapper.VideoMapper;
 import com.hubu.online.entity.Video;
 import com.hubu.online.service.VideoService;

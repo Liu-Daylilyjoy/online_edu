@@ -1,6 +1,6 @@
 package com.hubu.online.controller;
 
-import com.hubu.online.controller.JsonResult;
+import com.hubu.online.entity.JsonResult;
 import com.hubu.online.utils.FileUploadUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;

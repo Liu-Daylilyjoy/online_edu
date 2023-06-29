@@ -1,8 +1,7 @@
 package com.hubu.online.controller;
 
-import com.hubu.online.entity.BatchParam;
+import com.hubu.online.entity.*;
 import com.hubu.online.utils.FileUploadUtil;
-import com.hubu.online.entity.Course;
 import com.hubu.online.service.ClassifyService;
 import com.hubu.online.service.CourseService;
 import com.hubu.online.service.TeacherService;
@@ -33,21 +32,21 @@ public class CourseController extends BaseController {
 
     @RequestMapping()
     public String view(Model model) {
-    	model.addAttribute("classifyList", classifyService.list());
-    	model.addAttribute("teacherList", teacherService.list());
+        model.addAttribute("classifyList", classifyService.list());
+        model.addAttribute("teacherList", teacherService.list());
         return "course/course.html";
     }
-    
+
     @RequestMapping("/ggkc")
     public String ggkc() {
         return "course/public_course.html";
     }
-    
+
     @RequestMapping("/zykc")
     public String zykc() {
         return "course/professional_course.html";
     }
-    
+
     @RequestMapping("/mfkc")
     public String mfkc() {
         return "course/free_course.html";
@@ -88,7 +87,7 @@ public class CourseController extends BaseController {
     @ResponseBody
     @RequestMapping("/save")
     public JsonResult save(Course course) {
-    	course.setCreateTime(new Date());
+        course.setCreateTime(new Date());
         if (courseService.save(course)) {
             return JsonResult.ok("添加成功");
         }
@@ -106,76 +105,76 @@ public class CourseController extends BaseController {
         }
         return JsonResult.error("修改失败");
     }
-    
-    
+
+
     @ResponseBody
     @RequestMapping("/updateggkc")
-    public JsonResult updateggkc(Integer id,String type) {
-    	Course course = courseService.getById(id);
-    	if(type.equals("add")) {
-    		course.setGgkc(1);
-    	}else {
-    		course.setGgkc(0);
-    	}
-        if (courseService.updateById(course)) {
-        	if(type.equals("add")) {
-        		return JsonResult.ok("添加成功");
-        	}else {
-        		return JsonResult.ok("移除成功");
-        	}
+    public JsonResult updateggkc(Integer id, String type) {
+        Course course = courseService.getById(id);
+        if (type.equals("add")) {
+            course.setGgkc(1);
+        } else {
+            course.setGgkc(0);
         }
-        if(type.equals("add")) {
-        	return JsonResult.error("添加失败");
-    	}else {
-    		return JsonResult.error("移除失败");
-    	}
-        
+        if (courseService.updateById(course)) {
+            if (type.equals("add")) {
+                return JsonResult.ok("添加成功");
+            } else {
+                return JsonResult.ok("移除成功");
+            }
+        }
+        if (type.equals("add")) {
+            return JsonResult.error("添加失败");
+        } else {
+            return JsonResult.error("移除失败");
+        }
+
     }
-    
+
     @ResponseBody
     @RequestMapping("/updatezykc")
-    public JsonResult updatezykc(Integer id,String type) {
-    	Course course = courseService.getById(id);
-    	if(type.equals("add")) {
-    		course.setZykc(1);
-    	}else {
-    		course.setZykc(0);
-    	}
-        if (courseService.updateById(course)) {
-        	if(type.equals("add")) {
-        		return JsonResult.ok("添加成功");
-        	}else {
-        		return JsonResult.ok("移除成功");
-        	}
+    public JsonResult updatezykc(Integer id, String type) {
+        Course course = courseService.getById(id);
+        if (type.equals("add")) {
+            course.setZykc(1);
+        } else {
+            course.setZykc(0);
         }
-        if(type.equals("add")) {
-        	return JsonResult.error("添加失败");
-    	}else {
-    		return JsonResult.error("移除失败");
-    	}
+        if (courseService.updateById(course)) {
+            if (type.equals("add")) {
+                return JsonResult.ok("添加成功");
+            } else {
+                return JsonResult.ok("移除成功");
+            }
+        }
+        if (type.equals("add")) {
+            return JsonResult.error("添加失败");
+        } else {
+            return JsonResult.error("移除失败");
+        }
     }
-    
+
     @ResponseBody
     @RequestMapping("/updatemfkc")
-    public JsonResult updatemfkc(Integer id,String type) {
-    	Course course = courseService.getById(id);
-    	if(type.equals("add")) {
-    		course.setMfkc(1);
-    	}else {
-    		course.setMfkc(0);
-    	}
-        if (courseService.updateById(course)) {
-        	if(type.equals("add")) {
-        		return JsonResult.ok("添加成功");
-        	}else {
-        		return JsonResult.ok("移除成功");
-        	}
+    public JsonResult updatemfkc(Integer id, String type) {
+        Course course = courseService.getById(id);
+        if (type.equals("add")) {
+            course.setMfkc(1);
+        } else {
+            course.setMfkc(0);
         }
-        if(type.equals("add")) {
-        	return JsonResult.error("添加失败");
-    	}else {
-    		return JsonResult.error("移除失败");
-    	}
+        if (courseService.updateById(course)) {
+            if (type.equals("add")) {
+                return JsonResult.ok("添加成功");
+            } else {
+                return JsonResult.ok("移除成功");
+            }
+        }
+        if (type.equals("add")) {
+            return JsonResult.error("添加失败");
+        } else {
+            return JsonResult.error("移除失败");
+        }
     }
 
     /**
@@ -225,7 +224,7 @@ public class CourseController extends BaseController {
         }
         return JsonResult.error("删除失败");
     }
-    
+
     @ResponseBody
     @PostMapping("/edit_upload")
     public JsonResult edit_upload(@RequestParam MultipartFile file) {

@@ -1,7 +1,6 @@
 package com.hubu.online.controller;
 
-import com.hubu.online.entity.BatchParam;
-import com.hubu.online.entity.Carousel;
+import com.hubu.online.entity.*;
 import com.hubu.online.service.CarouselService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

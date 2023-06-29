@@ -2,8 +2,8 @@ package com.hubu.online.utils;
 
 import cn.hutool.core.img.ImgUtil;
 import cn.hutool.core.io.IoUtil;
-import com.hubu.online.constant.Constants;
-import com.hubu.online.controller.JsonResult;
+import com.hubu.online.entity.Constants;
+import com.hubu.online.entity.JsonResult;
 import org.apache.tika.Tika;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,7 +22,7 @@ public class FileUploadUtil {
     // 缩略图存放的目录
     public static final String UPLOAD_SM_DIR = Constants.UPLOAD_DIR + "thumbnail/";
     
-    public static final String UPLOAD_PATH = "http://localhost:8081/getFileURL/file/";
+    public static final String UPLOAD_PATH = "http://rwxu06s4o.hd-bkt.clouddn.com/img";
 
     /**
      * 上传文件

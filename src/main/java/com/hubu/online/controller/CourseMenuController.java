@@ -1,7 +1,6 @@
 package com.hubu.online.controller;
 
-import com.hubu.online.entity.BatchParam;
-import com.hubu.online.entity.CourseMenu;
+import com.hubu.online.entity.*;
 import com.hubu.online.service.CourseMenuService;
 
 import org.springframework.beans.factory.annotation.Autowired;

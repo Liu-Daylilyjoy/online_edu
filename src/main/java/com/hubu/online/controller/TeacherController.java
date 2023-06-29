@@ -1,13 +1,10 @@
 package com.hubu.online.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.hubu.online.entity.BatchParam;
+import com.hubu.online.entity.*;
 import com.hubu.online.utils.FileUploadUtil;
-import com.hubu.online.entity.User;
-import com.hubu.online.entity.UserRole;
 import com.hubu.online.service.UserRoleService;
 import com.hubu.online.service.UserService;
-import com.hubu.online.entity.Teacher;
 import com.hubu.online.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

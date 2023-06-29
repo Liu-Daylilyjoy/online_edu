@@ -1,9 +1,8 @@
 package com.hubu.online.controller;
 
-import java.util.Date;
-
 import javax.servlet.http.HttpServletRequest;
 
+import com.hubu.online.entity.*;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -13,25 +12,23 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.hubu.online.shiro.CustomizedToken;
 import com.hubu.online.utils.FileUploadUtil;
-import com.hubu.online.entity.Student;
 import com.hubu.online.service.StudentService;
-import com.hubu.online.entity.Classify;
-import com.hubu.online.entity.Course;
-import com.hubu.online.entity.Teacher;
-import com.hubu.online.entity.Video;
 import com.hubu.online.service.ClassifyService;
 import com.hubu.online.service.CourseService;
 import com.hubu.online.service.CarouselService;
 import com.hubu.online.service.CourseMenuService;
 import com.hubu.online.service.TeacherService;
 import com.hubu.online.service.VideoService;
-import com.wf.captcha.utils.CaptchaUtil;
 
 @Controller
 @RequestMapping("/default")
@@ -50,19 +47,7 @@ public class DefaultController {
 	@Autowired
 	private VideoService videoService;
 	@Autowired
-	private StudentService studentService;
-
-//	//注册
-//	@ResponseBody
-//	@RequestMapping("/save")
-//	public JsonResult save(@RequestBody Student student) {
-//		student.setState(0);
-//		student.setPassword(studentService.encodePsw(student.getPassword()));
-//		if (studentService.saveStudent(student)) {
-//			return JsonResult.ok("添加成功");
-//		}
-//		return JsonResult.error("添加失败");
-//	}
+	private StudentService usertwoService;
 	
 	@RequestMapping("/default")
     public String index(Model model) {
@@ -187,7 +172,7 @@ public class DefaultController {
      */
 	@RequestMapping("/login")
     public String login(Model model) {
-
+		
 		Subject subject = SecurityUtils.getSubject();
         Object object = subject.getPrincipal();
         if (object != null) {
@@ -202,8 +187,8 @@ public class DefaultController {
 			model.addAttribute("menu", courseMenuService.list());
 			return "default/login.html";
 		}
-
-
+		
+        
     }
 
 	/**

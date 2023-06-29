@@ -1,7 +1,6 @@
 package com.hubu.online.controller;
 
-import com.hubu.online.entity.BatchParam;
-import com.hubu.online.entity.Classify;
+import com.hubu.online.entity.*;
 import com.hubu.online.service.ClassifyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +10,6 @@ import java.util.List;
 
 /**
  * 管理
- * Created by AutoGenerator on 2020-08-13 09:08:35
  */
 @Controller
 @RequestMapping("/course/classify")

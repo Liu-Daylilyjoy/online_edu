@@ -2,7 +2,8 @@ package com.hubu.online.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.hubu.online.exception.BusinessException;
+import com.hubu.online.entity.JsonResult;
+import com.hubu.online.exception.BaseException;
 import com.hubu.online.entity.Menu;
 import com.hubu.online.entity.RoleMenu;
 import com.hubu.online.service.MenuService;
@@ -99,7 +100,7 @@ public class RoleMenuController extends BaseController {
             if (roleMenuService.saveBatch(roleMenuList)) {
                 return JsonResult.ok("保存成功");
             } else {
-                throw new BusinessException("操作失败");
+                throw new BaseException("操作失败");
             }
         }
         return JsonResult.ok("保存成功");

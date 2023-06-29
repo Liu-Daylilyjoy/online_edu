@@ -1,8 +1,8 @@
 package com.hubu.online.exception;
 
 import com.alibaba.fastjson.JSON;
-import com.hubu.online.constant.Constants;
-import com.hubu.online.controller.JsonResult;
+import com.hubu.online.entity.Constants;
+import com.hubu.online.entity.JsonResult;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

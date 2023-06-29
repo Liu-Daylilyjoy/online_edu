@@ -3,12 +3,7 @@ package com.hubu.online.utils;
 import cn.hutool.core.util.StrUtil;
 
 import java.lang.reflect.Field;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.*;
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
-
 
 /**
  * 常用工具方法
@@ -302,53 +297,5 @@ public class CoreUtil {
         }
         return null;
     }
-
-    /***
-     * BASE64解密
-     * @param key
-     * @return
-     * @throws Exception
-     */
-
-    public static byte[] decryBASE64(String key) throws Exception{
-        return (new BASE64Decoder()).decodeBuffer(key);
-    }
-    /***
-     * BASE64加密
-     * @param key
-     * @return
-     * @throws Exception
-     */
-    public static String encryptBASE64(byte[] key) throws Exception{
-        return (new BASE64Encoder()).encode(key);
-    }
-
-    /**
-     * 对字符串进行MD5加密
-     * @param data
-     * @return
-     */
-    private static MessageDigest digest = null;
-    public static String encode(String data) {
-            try {
-                digest = MessageDigest.getInstance("MD5");
-            } catch (NoSuchAlgorithmException nsae) {
-                System.out.println("加密错误");
-                nsae.printStackTrace();
-            }
-        digest.update(data.getBytes());
-        return encodeHex(digest.digest());
-    }
-
-    private static String encodeHex(byte bytes[]) {
-        StringBuffer buf = new StringBuffer(bytes.length * 2);
-        for (int i = 0; i < bytes.length; i++) {
-            if ((bytes[i] & 0xff) < 16)
-                buf.append("0");
-            buf.append(Long.toString(bytes[i] & 0xff, 16));
-        }
-        return buf.toString().toUpperCase();
-    }
-
 
 }

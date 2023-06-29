@@ -50,7 +50,9 @@ public class AdminRealm extends AuthorizingRealm {
         // 角色
         Set<String> roles = new HashSet<>();
         for (Role r : user.getRoles()) {
-            if (r.getDeleted() == 0) roles.add(r.getRoleCode());
+            if (r.getDeleted() == 0) {
+                roles.add(r.getRoleCode());
+            }
         }
         authorizationInfo.setRoles(roles);
         // 权限
