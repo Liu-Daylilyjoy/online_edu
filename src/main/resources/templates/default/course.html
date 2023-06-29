@@ -49,7 +49,7 @@
 	</div>
 	<!-- 项目模板 -->
 	<script type="text/html" id="demoCardItem1">
-    <div class="layui-col-md3 datagrid-item" onclick="Detail({{d.id}})">
+    <div class="layui-col-md3 datagrid-item" onclick="Detail{{d.id}}">
         <div class="project-list-item">
             <img class="project-list-item-cover" src="{{d.imageUrl}}"/>
             <div class="project-list-item-body">
@@ -57,7 +57,7 @@
                 <div class="project-list-item-desc">
                     <span class="time">{{d.createTime}}</span>
                     <div class="head-list">
-                        <img class="head-list-item" lay-tips="曲丽丽" lay-offset="0,-5px"
+                        <img class="head-list-item" lay-tips="夏雨" lay-offset="0,-5px"
                              src="https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png"/>
                     </div>
                 </div>
