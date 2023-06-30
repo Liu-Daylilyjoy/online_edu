@@ -112,12 +112,6 @@
             <version>1.0.5</version>
         </dependency>
 
-        <!-- 发送邮件 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-mail</artifactId>
-        </dependency>
-
         <!-- shiro -->
         <dependency>
             <groupId>org.apache.shiro</groupId>
@@ -135,13 +129,6 @@
             <groupId>com.ibeetl</groupId>
             <artifactId>beetl</artifactId>
             <version>3.0.16.RELEASE</version>
-        </dependency>
-
-        <!-- 图形验证码 -->
-        <dependency>
-            <groupId>com.github.whvcse</groupId>
-            <artifactId>easy-captcha</artifactId>
-            <version>1.6.2</version>
         </dependency>
 
     </dependencies>
