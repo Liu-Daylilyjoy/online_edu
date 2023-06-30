@@ -2,6 +2,7 @@ package com.hubu.online.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.alibaba.fastjson.JSON;
 import com.hubu.online.entity.*;
 import com.hubu.online.service.*;
 import org.apache.shiro.SecurityUtils;
@@ -13,16 +14,16 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.hubu.online.shiro.CustomizedToken;
 import com.hubu.online.utils.FileUploadUtil;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/default")
@@ -42,6 +43,8 @@ public class DefaultController {
     private VideoService videoService;
     @Autowired
     private ExamService examService;
+    @Autowired
+    private QuestionService questionService;
 
     @RequestMapping("/default")
     public String index(Model model) {
@@ -82,8 +85,20 @@ public class DefaultController {
         return "default/exam.html";
     }
 
+    @RequestMapping("/goExam")
+    public String goExam(String examId, Model model) {
+        Exam exam = examService.getById(examId);
+        QueryWrapper<Question> wrapper = new QueryWrapper<>();
+        wrapper.eq("exam_id", examId);
+        List<Question> questionList = questionService.list(wrapper);
 
-
+        Subject subject = SecurityUtils.getSubject();
+        Object object = subject.getPrincipal();
+        model.addAttribute("user", object);
+        model.addAttribute("exam", exam);
+        model.addAttribute("questionList", JSON.toJSONString(questionList));
+        return "default/doExam.html";
+    }
 
 
 
