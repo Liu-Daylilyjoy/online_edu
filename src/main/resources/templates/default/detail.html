@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>${course.name!}</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="${ctxPath}/assets/libs/layui/css/layui.css"/>
+  <link rel="stylesheet" href="${ctxPath}/assets/css/style.css"/>
+  <link rel="stylesheet" href="${ctxPath}/assets/css/css.css"/>
+  <link rel="stylesheet" href="${ctxPath}/assets/css/global.css"/>
+</head>
+<body>
+    <!-- 顶部 -->
+    <:include file="../common/header.html"/>
+	<div class="course_body">
+	    <div class="w1220 course_nav">
+	        <span class="layui-breadcrumb">
+	            <a href="/default/default">首页</a>
+	            <a href="/defaul/course">课程</a>
+	          <a><cite>${course.name!}</cite></a>
+	        </span>
+	    </div>
+	    <div class="w1220 course_intro">
+	        <div class="course_img">
+	            <img src="${course.imageUrl!}"/>
+	        </div>
+	        <div class="course_detail">
+	            <h1>${course.name!}</h1>
+	            <div class="some">
+	                <p> 课程类别：<span>${classify.name!}</span></p>
+	                <:if test="${course.type=='free'}">
+	                <p>课程类型：免费课程</p>
+	                </:if>
+	                <:if test="${course.type=='audition'}">
+	                <p>课程类型：<strong style="color: red">VIP课程</strong></p>
+	                </:if>
+	            </div>
+	            <:if test="${course.type=='free'}">
+	            <a class="layui-btn layui-btn-lg">免费在线学习该课程</a>
+	            </:if>
+	            <:if test="${course.type=='audition'}">
+	            <:if test="${order==null}">
+                <a onclick="Pay(${course.id})" style="background: red" class="layui-btn layui-btn-lg" target="_blank">点击开通VIP会员学习本课程</a>
+                </:if>
+                <:if test="${order!=null}">
+                <a class="layui-btn layui-btn-lg" style="background: red">已购买现在学习该课程</a>
+                </:if>
+                </:if>
+	        </div>
+	        <div id="share" class="share"></div>
+	        <div class="course_img2">
+	            <img src="${ctxPath}/assets/images/course_image.png" >
+	        </div>
+	    </div>
+	
+	    <div class="w1220 course_content">
+	        <div class="content_left" id="content">
+	            <div class="layui-tab layui-tab-brief" >
+	                <ul class="layui-tab-title">
+	                    <li class="layui-this"><h3>课程介绍</h3></li>
+	                    <li><h3>课程目录</h3></li>
+	                </ul>
+	                <div class="layui-tab-content">
+	                    <div class="layui-tab-item layui-show">${course.content}</div>
+	                    <div class="layui-tab-item">
+	                       <ul>
+	                            <:for items="${videos}" var="item">
+			                        <li>
+			                        <h3>${item.name}</h3>
+			                        <video  height="400" width="850" controls autobuffer><source src="${item.url}" type="video/mp4" /></video>
+			                        </li>
+			                    </:for>
+			                </ul>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="content_right">
+	            <div class="teacher">
+	                <div class="layui-tab" style="margin-bottom: 0px">
+	                    <ul class="layui-tab-title">
+	                        <li><h3>授课老师</h3></li>
+	                    </ul>
+	                    <div class="layui-tab-content" style="height: 100px;padding-bottom: 0px">
+	                        <div class="layui-tab-item layui-show">
+	                            <a href="/article/8" target="_blank"><img src="${teacher.imageName}" ></a>
+	                            <a href="/article/8" target="_blank"><span>${teacher.nickName}</span>
+	                            <p>${teacher.remark}</p></a>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="recommend">
+	                <div class="layui-tab" style="margin-bottom: 0px">
+	                    <ul class="layui-tab-title">
+	                        <li><h3>课程推荐</h3></li>
+	                    </ul>
+	                    <div class="layui-tab-content" style="padding-bottom: 0px;padding-right: 0px;">
+	                        <div class="layui-tab-item layui-show">
+	                            <ul class="rcourse">
+	                                <:for items="${tuijian}" var="item">
+			                            <li>
+		                                    <img src="${ctxPath}/assets/images/hot.gif">
+		                                    <span><a onclick="Detail(${item.id})">${item.name}</a></span>
+		                                </li>
+			                        </:for>
+	                            </ul>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+    </div>
+	
+    <!-- 底部 -->
+	<:include file="../common/footer.html"/>
+	<:include file="../common/js.html"/>
+	<script>
+	    layui.config({
+		  version: new Date().getTime()
+		  ,base: '${ctxPath}/assets/module/'
+		}).extend({
+			detail : 'detail'
+		}).use('detail');
+	    
+	</script>
+</body>
+</html>
