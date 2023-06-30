@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -115,41 +116,16 @@ public class ExamController extends BaseController {
         return JsonResult.error("修改失败");
     }
 
-
-//    @ResponseBody
-//    @RequestMapping("/updateggkc")
-//    public JsonResult updateggkc(Integer id,String type) {
-//        Exam exam = examService.getById(id);
-//        if(type.equals("add")) {
-//            exam.setGgkc(1);
-//        }else {
-//            exam.setGgkc(0);
-//        }
-//        if (examService.updateById(exam)) {
-//            if(type.equals("add")) {
-//                return JsonResult.ok("添加成功");
-//            }else {
-//                return JsonResult.ok("移除成功");
-//            }
-//        }
-//        if(type.equals("add")) {
-//            return JsonResult.error("添加失败");
-//        }else {
-//            return JsonResult.error("移除失败");
-//        }
-//
-//    }
-
     /**
      * 删除
      */
     @ResponseBody
     @RequestMapping("/remove")
-    public JsonResult remove(Integer id) {
-        if (examService.removeById(id)) {
-            return JsonResult.ok("删除成功");
-        }
-        return JsonResult.error("删除失败");
+    public JsonResult remove(String id) {
+        examService.removeById(id);
+        questionService.deleteByExamId(id);
+
+        return JsonResult.ok("删除成功");
     }
 
     /**
@@ -181,12 +157,15 @@ public class ExamController extends BaseController {
     /**
      * 批量删除
      */
+    @Transactional
     @ResponseBody
     @RequestMapping("/removeBatch")
-    public JsonResult removeBatch(@RequestBody List<Integer> ids) {
-        if (examService.removeByIds(ids)) {
-            return JsonResult.ok("删除成功");
+    public JsonResult removeBatch(@RequestBody List<String> ids) {
+        for (String examId : ids) {
+            examService.removeByIds(ids);
+            questionService.deleteByExamId(examId);
         }
-        return JsonResult.error("删除失败");
+
+        return JsonResult.ok("删除成功");
     }
 }

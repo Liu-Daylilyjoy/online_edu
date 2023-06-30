@@ -8,4 +8,5 @@ import com.hubu.online.entity.Question;
  * @date 2023/6/28 16:42
  */
 public interface QuestionService extends IService<Question> {
+    boolean deleteByExamId(String examId);
 }

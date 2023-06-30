@@ -44,6 +44,7 @@
     </div>
 </div>
 
+<script src="${ctxPath}/assets/js/axios.js"></script>
 <script>
     layui.use(['table', 'layer'], function () {
         var table = layui.table;
@@ -51,8 +52,15 @@
 
         // 定义进入考试的函数
         window.enterExam = function (examId) {
-            // TODO: 跳转到对应的考试页面
-            layer.msg('进入考试：' + examId);
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/server', true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    window.location.href = '/success.html';
+                }
+            };
+            xhr.send('name=' + name + '&email=' + email);
         }
     });
 </script>

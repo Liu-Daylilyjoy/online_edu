@@ -127,7 +127,7 @@
                     return layer.msg('请选择要删除的数据', {icon: 2, anim: 6});
                 }
                 var ids = checkRows.data.map(function (d) {
-                    return d.id;
+                    return d.examId;
                 });
                 doDel({ids: ids});
             }
@@ -179,7 +179,7 @@
                 });
             } else {  // 单个删除
                 var loadIndex = layer.load(2);
-                $.get('exam/remove', {id: obj.data.id}, function (res) {
+                $.get('exam/remove', {id: obj.data.examId}, function (res) {
                     layer.close(loadIndex);
                     if (0 === res.code) {
                         layer.msg(res.msg, {icon: 1});
