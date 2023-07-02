@@ -18,7 +18,7 @@ import java.util.*;
  */
 public class FileUploadUtil {
     // 文件上传的目录
-    public static final String UPLOAD_FILE_DIR = Constants.UPLOAD_DIR + "file/";
+    public static final String UPLOAD_FILE_DIR = Constants.UPLOAD_DIR + "/file/";
     // 缩略图存放的目录
     public static final String UPLOAD_SM_DIR = Constants.UPLOAD_DIR + "thumbnail/";
     
@@ -34,7 +34,9 @@ public class FileUploadUtil {
         String path;  // 文件保存路径
         // 文件原始名称
         String orgName = file.getOriginalFilename();
-        if (orgName == null) return JsonResult.error("上传失败");
+        if (orgName == null) {
+            return JsonResult.error("上传失败");
+        }
         File outFile;
         String suffix = orgName.substring(orgName.lastIndexOf(".") + 1);  // 获取文件后缀
         if (Constants.UPLOAD_UUID_NAME) {  // uuid命名
@@ -67,7 +69,9 @@ public class FileUploadUtil {
         String path;  // 文件保存路径
         // 文件原始名称
         String orgName = file.getOriginalFilename(), dir = getDateDir();
-        if (orgName == null) return JsonResult.error("上传失败");
+        if (orgName == null) {
+            return JsonResult.error("上传失败");
+        }
         File outFile;
         String suffix = orgName.substring(orgName.lastIndexOf(".") + 1);  // 获取文件后缀
         if (Constants.UPLOAD_UUID_NAME) {  // uuid命名
@@ -107,13 +111,13 @@ public class FileUploadUtil {
      * @return 示例：{"code": 0, "msg": "", "url": ""}
      */
     public static JsonResult upload(String base64) {
-        if (base64 == null || base64.trim().isEmpty()) return JsonResult.error("上传失败");
+        if (base64 == null || base64.trim().isEmpty()) {
+            return JsonResult.error("上传失败");
+        }
         String suffix = base64.substring(11, base64.indexOf(";"));  // 获取文件格式
         String path = getDateDir() + UUID.randomUUID().toString().replaceAll("-", "") + "." + suffix;
         File outFile = new File(UPLOAD_FILE_DIR, path);
-        if (!outFile.getParentFile().exists()) {
-            if (!outFile.getParentFile().mkdirs()) return JsonResult.error("上传失败");
-        }
+
         try {
             byte[] bytes = Base64.getDecoder().decode(base64.substring(base64.indexOf(";") + 8).getBytes());
             IoUtil.write(new FileOutputStream(outFile), true, bytes);

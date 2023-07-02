@@ -7,7 +7,7 @@ import java.io.File;
  */
 public class Constants {
     /* 文件服务器配置 */
-    public static final String UPLOAD_DIR = File.listRoots()[2] + "/upload/";  // 上传的目录
+    public static final String UPLOAD_DIR = "http://rwxu06s4o.hd-bkt.clouddn.com";  // 上传的目录
     public static final boolean UPLOAD_UUID_NAME = false;  // 文件上传是否用uuid命名
 
     /* 返回结果统一 */

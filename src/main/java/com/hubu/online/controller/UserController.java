@@ -154,7 +154,7 @@ public class UserController extends BaseController {
      */
     @RequiresPermissions("sys:user:remove")
     @ResponseBody
-    @RequestMapping("/deleteBatch")
+    @RequestMapping("/removeBatch")
     public JsonResult deleteBatch(@RequestBody List<Integer> ids) {
         if (userService.removeByIds(ids)) {
             return JsonResult.ok("删除成功");

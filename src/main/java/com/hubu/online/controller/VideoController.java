@@ -43,8 +43,6 @@ public class VideoController extends BaseController {
     public JsonResult list(HttpServletRequest request) {
         PageParam<Video> pageParam = new PageParam<>(request);
         return JsonResult.ok().setData(videoService.list(pageParam.getOrderWrapper()));
-        //List<Classify> records = classifyService.listAll(pageParam.getNoPageParam());  // 使用关联查询
-        //return JsonResult.ok().setData(pageParam.sortRecords(records));
     }
 
     /**
@@ -54,11 +52,6 @@ public class VideoController extends BaseController {
     @RequestMapping("/get")
     public JsonResult get(Integer id) {
         return JsonResult.ok().setData(videoService.getById(id));
-		// 使用关联查询
-        //PageParam<Classify> pageParam = new PageParam<>();
-		//pageParam.put("id", id);
-        //List<Classify> records = classifyService.listAll(pageParam.getNoPageParam());
-        //return JsonResult.ok().setData(pageParam.getOne(records));
     }
 
     /**

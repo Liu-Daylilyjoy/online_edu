@@ -1,9 +1,11 @@
 package com.hubu.online.controller;
 
-import com.hubu.online.entity.JsonResult;
+import com.alibaba.fastjson.JSON;
+import com.hubu.online.entity.*;
 import com.hubu.online.service.StudentService;
 import com.hubu.online.utils.CoreUtil;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,11 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.hubu.online.entity.Student;
 import com.hubu.online.service.CourseMenuService;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @RequestMapping("/users")
@@ -27,12 +28,97 @@ public class StudentController extends BaseController{
 	@Autowired
 	private StudentService studentService;
 
+	@RequestMapping("/student")
+	public String view() {
+		return "system/student.html";
+	}
+
 	/**
-	 * 修改用户
+	 * 添加
+	 */
+	@ResponseBody
+	@RequestMapping("student/save")
+	public JsonResult saveit(Student student) {
+		student.setPassword(studentService.encodePsw(student.getPassword()));
+		if (studentService.save(student)) {
+			return JsonResult.ok("添加成功");
+		}
+		return JsonResult.error("添加失败");
+	}
+
+	/**
+	 * 修改
+	 */
+	@ResponseBody
+	@RequestMapping("student/update")
+	public JsonResult updateit(Student student) {
+		if (studentService.updateById(student)) {
+			return JsonResult.ok("修改成功");
+		}
+		return JsonResult.error("修改失败");
+	}
+
+
+	/**
+	 * 删除用户
+	 */
+	@ResponseBody
+	@RequestMapping("/remove")
+	public JsonResult remove(Integer id) {
+		if (studentService.removeById(id)) {
+			return JsonResult.ok("删除成功");
+		}
+		return JsonResult.error("删除失败");
+	}
+
+	/**
+	 * 批量删除用户
+	 */
+	@ResponseBody
+	@RequestMapping("/removeBatch")
+	public JsonResult deleteBatch(@RequestBody List<Integer> ids) {
+		if (studentService.removeByIds(ids)) {
+			return JsonResult.ok("删除成功");
+		}
+		return JsonResult.error("删除失败");
+	}
+
+	/**
+	 * 重置密码
+	 */
+	@ResponseBody
+	@RequestMapping("/psw/reset")
+	public JsonResult resetPsw(Integer id, String password) {
+		Student student = new Student();
+		student.setUserId(id);
+		student.setPassword(studentService.encodePsw(password));
+		if (studentService.updateById(student)) {
+			return JsonResult.ok("重置成功");
+		} else {
+			return JsonResult.error("重置失败");
+		}
+	}
+
+	/**
+	 * 分页查询用户
+	 */
+//    @RequiresPermissions("sys:user:list")
+	@ResponseBody
+	@RequestMapping("/page")
+	public PageResult<Student> page(HttpServletRequest request) {
+		PageParam<Student> pageParam = new PageParam<>(request);
+		pageParam.setDefaultOrder(null, new String[]{"create_time"});
+		return studentService.listPage(pageParam);
+	}
+
+
+	/**
+	 * 前台修改用户个人信息
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
 	public JsonResult update(@RequestBody Student student) {
+
 		Subject subject = SecurityUtils.getSubject();
 		Object object = subject.getPrincipal();
 		Student loginstu = (Student)object;
@@ -45,7 +131,7 @@ public class StudentController extends BaseController{
 		return JsonResult.error("修改失败");
 	}
 
-	//改密码
+	//前台修改密码
 	@ResponseBody
 	@RequestMapping("/update2")
 	public JsonResult update2(HttpServletRequest request) {

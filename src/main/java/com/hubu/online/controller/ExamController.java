@@ -100,10 +100,16 @@ public class ExamController extends BaseController {
             questionList.add(temp);
         }
 
-        if (examService.save(exam) && questionService.saveBatch(questionList)) {
-            return JsonResult.ok("添加成功");
+        if ("".equals(data.get("examName")) || "".equals(data.get("examDesc"))) {
+            return JsonResult.error("发布失败");
         }
-        return JsonResult.error("添加失败");
+
+        examService.save(exam);
+
+        if (questionService.saveBatch(questionList)) {
+            return JsonResult.ok("发布成功");
+        }
+        return JsonResult.error("发布失败");
     }
 
     /**

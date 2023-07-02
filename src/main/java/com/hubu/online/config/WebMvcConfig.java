@@ -18,7 +18,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         //如果是Windows系统
-        registry.addResourceHandler("/getFileURL/**").addResourceLocations("file:D:/img/");
+        registry.addResourceHandler("http://rwxu06s4o.hd-bkt.clouddn.com/**").addResourceLocations("/img/");
     }
 
     /**
